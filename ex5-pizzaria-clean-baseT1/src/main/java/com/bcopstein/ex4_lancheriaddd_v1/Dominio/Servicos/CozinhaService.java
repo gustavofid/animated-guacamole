@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
+import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Entidades.StatusPedido;
 
 public class CozinhaService implements ICozinhaService {
     private Queue<Pedido> filaEntrada;
@@ -23,7 +24,7 @@ public class CozinhaService implements ICozinhaService {
     }
 
     private synchronized void colocaEmPreparacao(Pedido pedido){
-        pedido.setStatus(Pedido.Status.PREPARACAO);
+        pedido.setStatus(StatusPedido.PREPARACAO);
         emPreparacao = pedido;
         System.out.println("Pedido em preparacao: "+pedido);
         // Agenda pedidoPronto para ser chamado em 5 segundos
@@ -41,7 +42,7 @@ public class CozinhaService implements ICozinhaService {
 
     @Override
     public synchronized void pedidoPronto() {
-        emPreparacao.setStatus(Pedido.Status.PRONTO);
+        emPreparacao.setStatus(StatusPedido.PRONTO);
         filaSaida.add(emPreparacao);
         System.out.println("Pedido na fila de saida: "+emPreparacao);
         emPreparacao = null;
