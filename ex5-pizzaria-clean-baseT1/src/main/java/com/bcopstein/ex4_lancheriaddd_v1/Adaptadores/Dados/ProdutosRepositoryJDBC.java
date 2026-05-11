@@ -63,7 +63,7 @@ public class ProdutosRepositoryJDBC implements ProdutosRepository {
                 return new Produto(produtoId, descricao, receita, preco);
             }
         );
-        return produtos.isEmpty() ? null : produtos.getFirst();        
+        return produtos.isEmpty() ? null : produtos.get(0);        
     }
     
 }

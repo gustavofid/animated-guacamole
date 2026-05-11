@@ -35,7 +35,7 @@ public class CardapioRepositoryJDBC implements CardapioRepository{
         if (cardapios.isEmpty()) {
             return null;
         }
-        Cardapio cardapio = cardapios.getFirst();
+        Cardapio cardapio = cardapios.get(0);
         List<Produto> produtos = produtosRepository.recuperaProdutosCardapio(id);
         cardapio.setProdutos(produtos);
         return cardapio;
