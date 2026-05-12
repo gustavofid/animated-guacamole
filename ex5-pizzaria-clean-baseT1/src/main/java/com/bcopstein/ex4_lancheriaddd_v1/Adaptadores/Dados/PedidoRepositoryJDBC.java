@@ -98,9 +98,41 @@ public class PedidoRepositoryJDBC implements PedidoRepository{
             return null;
         }
 
-        Pedido pedido = pedidos.getFirst();
+        Pedido pedido = pedidos.get(0);
         pedido.setItens(recuperaItensPedido(id));
         return pedido;
+    }
+
+    @Override
+    public List<Pedido> recuperaPorClienteNoPeriodo(String cpf, java.time.LocalDateTime inicio) {
+        String sql = """
+            SELECT id, cliente_cpf, endereco_entrega, status,
+                valor, impostos, desconto, valor_cobrado,
+                data_criacao, data_hora_pagamento
+            FROM pedidos
+            WHERE cliente_cpf = ? AND data_criacao >= ?
+        """;
+
+        return this.jdbcTemplate.query(
+            sql,
+            ps -> {
+                ps.setString(1, cpf);
+                ps.setTimestamp(2, java.sql.Timestamp.valueOf(inicio));
+            },
+            (rs, rowNum) -> new Pedido(
+                rs.getLong("id"),
+                null,
+                rs.getTimestamp("data_hora_pagamento") != null ? rs.getTimestamp("data_hora_pagamento").toLocalDateTime() : null,
+                null,
+                StatusPedido.valueOf(rs.getString("status")),
+                rs.getDouble("valor"),
+                rs.getDouble("impostos"),
+                rs.getDouble("desconto"),
+                rs.getDouble("valor_cobrado"),
+                rs.getString("endereco_entrega"),
+                rs.getTimestamp("data_criacao") != null ? rs.getTimestamp("data_criacao").toLocalDateTime() : null
+            )
+        );
     }
 
     private List<ItemPedido> recuperaItensPedido(long pedidoId) {
