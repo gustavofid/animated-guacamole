@@ -36,7 +36,6 @@ public class ClienteController {
         );
 
         ClienteResponseDTO response = new ClienteResponseDTO(
-                cliente.getCpf(),
                 cliente.getNome(),
                 cliente.getEmail()
         );
