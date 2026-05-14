@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +45,6 @@ public class PedidoService {
 
         if (!estoqueService.verificaDisponibilidade(ingredientesNecessarios)) {
              return new Pedido(
-                new Random().nextLong(1000000),
                 cliente,
                 null,
                 itens,
@@ -65,7 +63,6 @@ public class PedidoService {
         double valorCobrado = (baseValue - desconto) + imposto;
 
         Pedido pedido = new Pedido(
-            new Random().nextLong(1000000),
             cliente,
             null,
             itens,

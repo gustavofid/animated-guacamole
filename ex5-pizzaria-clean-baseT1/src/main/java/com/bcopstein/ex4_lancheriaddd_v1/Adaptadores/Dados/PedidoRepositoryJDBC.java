@@ -1,9 +1,13 @@
 package com.bcopstein.ex4_lancheriaddd_v1.Adaptadores.Dados;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Dados.PedidoRepository;
@@ -29,24 +33,30 @@ public class PedidoRepositoryJDBC implements PedidoRepository{
     public Pedido salva(Pedido pedido) {
         String sql = """
             INSERT INTO pedidos
-            (id, cliente_cpf, endereco_entrega, status,
+            (cliente_cpf, endereco_entrega, status,
             valor, impostos, desconto, valor_cobrado,
             data_criacao, data_hora_pagamento)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
-        jdbcTemplate.update(sql,
-            pedido.getId(),
-            pedido.getCliente().getCpf(),
-            pedido.getEnderecoEntrega(),
-            pedido.getStatus().name(),
-            pedido.getValor(),
-            pedido.getImpostos(),
-            pedido.getDesconto(),
-            pedido.getValorCobrado(),
-            pedido.getDataCriacao(),
-            pedido.getDataHoraPagamento()
-        );
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, pedido.getCliente().getCpf());
+            ps.setString(2, pedido.getEnderecoEntrega());
+            ps.setString(3, pedido.getStatus().name());
+            ps.setDouble(4, pedido.getValor());
+            ps.setDouble(5, pedido.getImpostos());
+            ps.setDouble(6, pedido.getDesconto());
+            ps.setDouble(7, pedido.getValorCobrado());
+            ps.setTimestamp(8, java.sql.Timestamp.valueOf(pedido.getDataCriacao()));
+            ps.setTimestamp(9, pedido.getDataHoraPagamento() != null ? java.sql.Timestamp.valueOf(pedido.getDataHoraPagamento()) : null);
+            return ps;
+        }, keyHolder);
+
+        long generatedId = keyHolder.getKey().longValue();
+        pedido.setId(generatedId);
 
         String sqlItens = """
             INSERT INTO itens_pedido
