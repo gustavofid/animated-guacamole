@@ -3,7 +3,8 @@ create table if not exists clientes(
   nome varchar(100) not null,
   celular varchar(20) not null,
   endereco varchar(255) not null,
-  email varchar(255) not null
+  email varchar(255) not null unique,
+  senha varchar(255) not null
 );
 
 create table if not exists ingredientes (
