@@ -33,7 +33,7 @@ public class PedidoService {
     public Map<Long, Integer> calculaIngredientesNecessarios(List<ItemPedido> itens) {
         Map<Long, Integer> ingredientesNecessarios = new HashMap<>();
         for (ItemPedido item : itens) {
-            for (Ingrediente ing : item.getProduto().getReceita().getIngredientes()) {
+            for (Ingrediente ing : item.getItem().getReceita().getIngredientes()) {
                 ingredientesNecessarios.merge(ing.getId(), item.getQuantidade(), Integer::sum);
             }
         }
@@ -76,5 +76,32 @@ public class PedidoService {
         );
 
         return pedidoRepository.salva(pedido);
+    }
+
+    public StatusPedido consultaStatus(long idPedido) {
+        Pedido pedido = pedidoRepository.recuperaPorId(idPedido);
+
+        if (pedido == null) {
+            throw new IllegalArgumentException("Pedido não encontrado");
+        }
+
+        return pedido.getStatus();
+    }
+
+    public Pedido cancelaPedido(long idPedido) {
+        Pedido pedido = pedidoRepository.recuperaPorId(idPedido);
+
+        if (pedido == null) {
+            throw new IllegalArgumentException("Pedido não encontrado");
+        }
+
+        if (pedido.getStatus() != StatusPedido.APROVADO) {
+            throw new IllegalStateException("Somente pedidos aprovados e ainda não pagos podem ser cancelados");
+        }
+
+        pedidoRepository.atualizaStatus(idPedido, StatusPedido.CANCELADO);
+        pedido.setStatus(StatusPedido.CANCELADO);
+
+        return pedido;
     }
 }
