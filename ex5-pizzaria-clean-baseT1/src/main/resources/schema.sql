@@ -67,7 +67,7 @@ create table if not exists cardapio_produto (
 
 -- Tabela de Pedidos
 create table if not exists pedidos (
-  id bigint primary key,
+  id bigint auto_increment primary key,
   cliente_cpf varchar(15) not null,
   endereco_entrega varchar(255) not null,
   status varchar(30) not null,

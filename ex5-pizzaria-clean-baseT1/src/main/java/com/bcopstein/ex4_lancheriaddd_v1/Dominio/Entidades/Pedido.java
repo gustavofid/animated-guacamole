@@ -16,9 +16,8 @@ public class Pedido {
     private String enderecoEntrega;
     private LocalDateTime dataCriacao;
 
-    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
+    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
             StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
-        this.id = id;
         this.cliente = cliente;
         this.dataHoraPagamento = dataHoraPagamento;
         this.itens = itens;
@@ -33,6 +32,10 @@ public class Pedido {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Cliente getCliente() {
