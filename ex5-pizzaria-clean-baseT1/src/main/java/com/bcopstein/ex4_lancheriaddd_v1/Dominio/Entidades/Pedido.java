@@ -16,8 +16,21 @@ public class Pedido {
     private String enderecoEntrega;
     private LocalDateTime dataCriacao;
 
-    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
-            StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
+    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
+        this.cliente = cliente;
+        this.dataHoraPagamento = dataHoraPagamento;
+        this.itens = itens;
+        this.status = status;
+        this.valor = valor;
+        this.impostos = impostos;
+        this.desconto = desconto;
+        this.valorCobrado = valorCobrado;
+        this.enderecoEntrega = enderecoEntrega;
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
+        this.id = id;
         this.cliente = cliente;
         this.dataHoraPagamento = dataHoraPagamento;
         this.itens = itens;

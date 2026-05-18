@@ -166,4 +166,15 @@ public class PedidoRepositoryJDBC implements PedidoRepository{
             }
         );
     }
+
+    @Override
+    public void atualizaStatus(long id, StatusPedido status) {
+        String sql = """
+            UPDATE pedidos
+            SET status = ?
+            WHERE id = ?
+        """;
+
+        jdbcTemplate.update(sql, status.name(), id);
+    }
 }
