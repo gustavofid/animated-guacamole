@@ -51,7 +51,8 @@ public class PedidoService {
                 StatusPedido.NEGADO,
                 0, 0, 0, 0,
                 enderecoEntrega,
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                null
             );
         }
 
@@ -72,7 +73,8 @@ public class PedidoService {
             desconto,
             valorCobrado,
             enderecoEntrega,
-            LocalDateTime.now()
+            LocalDateTime.now(),
+            null
         );
 
         return pedidoRepository.salva(pedido);

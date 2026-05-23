@@ -29,7 +29,7 @@ public class FinanceiroService {
 
     public double calculaDesconto(String cpf, double precoBase) {
         LocalDateTime vinteDiasAtras = LocalDateTime.now().minusDays(20);
-        List<Pedido> pedidosRecentes = pedidoRepository.recuperaPorClienteNoPeriodo(cpf, vinteDiasAtras);
+        List<Pedido> pedidosRecentes = pedidoRepository.recuperaPorClienteNoPeriodo(cpf, vinteDiasAtras, LocalDateTime.now());
         if (pedidosRecentes.size() > 3) {
             return precoBase * 0.07;
         }

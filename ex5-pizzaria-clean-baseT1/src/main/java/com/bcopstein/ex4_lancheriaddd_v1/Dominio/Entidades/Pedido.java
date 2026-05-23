@@ -15,8 +15,9 @@ public class Pedido {
     private double valorCobrado;
     private String enderecoEntrega;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataEntrega;
 
-    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
+    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao, LocalDateTime dataEntrega) {
         this.cliente = cliente;
         this.dataHoraPagamento = dataHoraPagamento;
         this.itens = itens;
@@ -27,9 +28,10 @@ public class Pedido {
         this.valorCobrado = valorCobrado;
         this.enderecoEntrega = enderecoEntrega;
         this.dataCriacao = dataCriacao;
+        this.dataEntrega = dataEntrega;
     }
 
-    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao) {
+    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao, LocalDateTime dataEntrega) {
         this.id = id;
         this.cliente = cliente;
         this.dataHoraPagamento = dataHoraPagamento;
@@ -41,6 +43,7 @@ public class Pedido {
         this.valorCobrado = valorCobrado;
         this.enderecoEntrega = enderecoEntrega;
         this.dataCriacao = dataCriacao;
+        this.dataEntrega = dataEntrega;
     }
 
     public long getId() {
@@ -117,5 +120,13 @@ public class Pedido {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 }
