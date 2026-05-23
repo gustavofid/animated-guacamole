@@ -77,6 +77,7 @@ create table if not exists pedidos (
   valor_cobrado bigint,
   data_criacao timestamp,
   data_hora_pagamento timestamp,
+  data_entrega timestamp,
   foreign key (cliente_cpf) references clientes(cpf)
 );
 

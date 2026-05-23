@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Servicos.ClienteService;
 
-@Configuration
+//@Configuration
 public class DataLoader {
 
     @Bean
