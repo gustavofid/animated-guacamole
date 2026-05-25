@@ -12,4 +12,5 @@ public interface PedidoRepository {
     List<Pedido> recuperaEntreguesNoPeriodo(LocalDateTime inicio, LocalDateTime fim);
     List<Pedido> recuperaEntreguesPorClienteNoPeriodo(String cpf, LocalDateTime inicio, LocalDateTime fim);
     void atualizaStatus(long id, StatusPedido status);
+    void atualizaPagamento(long id, StatusPedido status, LocalDateTime dataHoraPagamento);
 }
