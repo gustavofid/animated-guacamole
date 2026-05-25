@@ -20,14 +20,20 @@ public class PedidoService {
     private PedidoRepository pedidoRepository;
     private EstoqueService estoqueService;
     private FinanceiroService financeiroService;
+    private IPagamentoService pagamentoService;
+    private ICozinhaService cozinhaService;
 
     @Autowired
     public PedidoService(PedidoRepository pedidoRepository, 
                          EstoqueService estoqueService,
-                         FinanceiroService financeiroService) {
+                         FinanceiroService financeiroService,
+                         IPagamentoService pagamentoService,
+                         ICozinhaService cozinhaService) {
         this.pedidoRepository = pedidoRepository;
         this.estoqueService = estoqueService;
         this.financeiroService = financeiroService;
+        this.pagamentoService = pagamentoService;
+        this.cozinhaService = cozinhaService;
     }
 
     public Map<Long, Integer> calculaIngredientesNecessarios(List<ItemPedido> itens) {
@@ -103,6 +109,31 @@ public class PedidoService {
 
         pedidoRepository.atualizaStatus(idPedido, StatusPedido.CANCELADO);
         pedido.setStatus(StatusPedido.CANCELADO);
+
+        return pedido;
+    }
+
+    public Pedido pagarPedido(long idPedido) {
+        Pedido pedido = pedidoRepository.recuperaPorId(idPedido);
+
+        if (pedido == null) {
+            throw new IllegalArgumentException("Pedido não encontrado");
+        }
+
+        if (pedido.getStatus() != StatusPedido.APROVADO) {
+            throw new IllegalStateException("Somente pedidos aprovados podem ser pagos");
+        }
+
+        if (!pagamentoService.processaPagamento(pedido)) {
+            throw new IllegalStateException("Pagamento não autorizado");
+        }
+
+        LocalDateTime dataHoraPagamento = LocalDateTime.now();
+        pedidoRepository.atualizaPagamento(idPedido, StatusPedido.PAGO, dataHoraPagamento);
+        pedido.setStatus(StatusPedido.PAGO);
+        pedido.setDataHoraPagamento(dataHoraPagamento);
+
+        cozinhaService.chegadaDePedido(pedido);
 
         return pedido;
     }

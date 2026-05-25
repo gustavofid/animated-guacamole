@@ -29,6 +29,7 @@ import com.bcopstein.ex4_lancheriaddd_v1.Aplicacao.Responses.PedidoRequest;
 import com.bcopstein.ex4_lancheriaddd_v1.Aplicacao.Responses.PedidosPorPeriodo;
 import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Entidades.StatusPedido;
+import com.bcopstein.ex4_lancheriaddd_v1.Aplicacao.PagarPedidoUC;
 
 @RestController
 @RequestMapping("/pedido")
@@ -40,6 +41,7 @@ public class PedidoController {
     private EntregarPedidoUC entregarPedidoUC;
     private ListarPedidosClienteUC listarPedidosClienteUC;
     private ListarPedidosEntreguesClienteUC listarPedidosEntreguesClienteUC;
+    private PagarPedidoUC pagarPedidoUC;
 
     @Autowired
     public PedidoController(SubmeterPedidoUC submeterPedidoUC, 
@@ -48,7 +50,8 @@ public class PedidoController {
                             ListarPedidosPorPeriodoUC listarPedidosPorPeriodoUC,
                             EntregarPedidoUC entregarPedidoUC,
                             ListarPedidosClienteUC listarPedidosClienteUC,
-                            ListarPedidosEntreguesClienteUC listarPedidosEntreguesClienteUC) {
+                            ListarPedidosEntreguesClienteUC listarPedidosEntreguesClienteUC,
+                            PagarPedidoUC pagarPedidoUC) {
         this.submeterPedidoUC = submeterPedidoUC;
         this.solicitarStatusPedidoUC = solicitarStatusPedidoUC;
         this.cancelarPedidoUC = cancelarPedidoUC;
@@ -56,6 +59,7 @@ public class PedidoController {
         this.entregarPedidoUC = entregarPedidoUC;
         this.listarPedidosClienteUC = listarPedidosClienteUC;
         this.listarPedidosEntreguesClienteUC = listarPedidosEntreguesClienteUC;
+        this.pagarPedidoUC = pagarPedidoUC;
     }
 
     @PostMapping("/submeter")
@@ -113,5 +117,11 @@ public class PedidoController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
         return listarPedidosEntreguesClienteUC.run(cpf, inicio, fim);
+    }
+
+    @PatchMapping("/{id}/pagar")
+    @CrossOrigin("*")
+    public Pedido pagarPedido(@PathVariable long id) {
+        return pagarPedidoUC.run(id);
     }
 }
