@@ -12,7 +12,7 @@ public class ImpostoLei12345_2020Strategy implements IImpostoStrategy {
     }
 
     @Override
-    public String getCodigoLei() {
-        return "Lei12345_2020";
+    public String getId() {
+        return "1";
     }
 }

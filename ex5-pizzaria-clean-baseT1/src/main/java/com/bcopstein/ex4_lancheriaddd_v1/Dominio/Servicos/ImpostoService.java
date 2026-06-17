@@ -15,9 +15,9 @@ public class ImpostoService {
 
     @Autowired
     public ImpostoService(List<IImpostoStrategy> estrategias,
-                          @Value("${IMPOSTO_ATIVO:Lei12345_2020}") String codigoLeiAtiva) {
+                          @Value("${IMPOSTO_ATIVO:1}") String codigoLeiAtiva) {
         this.estrategiaAtiva = estrategias.stream()
-                .filter(e -> e.getCodigoLei().equals(codigoLeiAtiva))
+                .filter(e -> e.getId().equals(codigoLeiAtiva))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Estratégia de imposto não encontrada para a lei: " + codigoLeiAtiva));
@@ -27,7 +27,7 @@ public class ImpostoService {
         return estrategiaAtiva.calcular(precoBase);
     }
 
-    public String getLeiAtiva() {
-        return estrategiaAtiva.getCodigoLei();
+    public String getIdAtivo() {
+        return estrategiaAtiva.getId();
     }
 }
