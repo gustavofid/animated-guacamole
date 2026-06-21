@@ -44,6 +44,12 @@ public class CardapioController {
         return cardapioPresenter;
     }
 
+    @GetMapping("/corrente")
+    @CrossOrigin("*")
+    public CardapioPresenter recuperaCardapioCorrente(){
+        return recuperaCardapio(1L);
+    }
+
     @GetMapping("/lista")
     @CrossOrigin("*")
     public List<CabecalhoCardapioPresenter> recuperaListaCardapios(){

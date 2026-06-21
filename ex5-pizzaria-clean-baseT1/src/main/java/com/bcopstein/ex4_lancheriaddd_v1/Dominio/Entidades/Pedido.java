@@ -4,28 +4,34 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Pedido {
-    public enum Status {
-        NOVO,
-        APROVADO,
-        PAGO,
-        AGUARDANDO,
-        PREPARACAO,
-        PRONTO,
-        TRANSPORTE,
-        ENTREGUE
-    }
     private long id;
     private Cliente cliente;
     private LocalDateTime dataHoraPagamento;
     private List<ItemPedido> itens;
-    private Status status;
+    private StatusPedido status;
     private double valor;
     private double impostos;
     private double desconto;
     private double valorCobrado;
+    private String enderecoEntrega;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataEntrega;
 
-    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
-            Pedido.Status status, double valor, double impostos, double desconto, double valorCobrado) {
+    public Pedido(Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao, LocalDateTime dataEntrega) {
+        this.cliente = cliente;
+        this.dataHoraPagamento = dataHoraPagamento;
+        this.itens = itens;
+        this.status = status;
+        this.valor = valor;
+        this.impostos = impostos;
+        this.desconto = desconto;
+        this.valorCobrado = valorCobrado;
+        this.enderecoEntrega = enderecoEntrega;
+        this.dataCriacao = dataCriacao;
+        this.dataEntrega = dataEntrega;
+    }
+
+    public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens, StatusPedido status, double valor, double impostos, double desconto, double valorCobrado, String enderecoEntrega, LocalDateTime dataCriacao, LocalDateTime dataEntrega) {
         this.id = id;
         this.cliente = cliente;
         this.dataHoraPagamento = dataHoraPagamento;
@@ -35,10 +41,17 @@ public class Pedido {
         this.impostos = impostos;
         this.desconto = desconto;
         this.valorCobrado = valorCobrado;
+        this.enderecoEntrega = enderecoEntrega;
+        this.dataCriacao = dataCriacao;
+        this.dataEntrega = dataEntrega;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Cliente getCliente() {
@@ -49,15 +62,23 @@ public class Pedido {
         return dataHoraPagamento;
     }
 
+    public void setDataHoraPagamento(LocalDateTime dataHoraPagamento) {
+        this.dataHoraPagamento = dataHoraPagamento;
+    }
+
     public List<ItemPedido> getItens() {
         return itens;
     }
 
-    public Status getStatus() {
+    public void setItens(List<ItemPedido> itens){
+        this.itens = itens;
+    }
+
+    public StatusPedido getStatus() {
         return status;
     }
 
-    public void setStatus(Status status){
+    public void setStatus(StatusPedido status){
         this.status = status;
     }
 
@@ -65,15 +86,47 @@ public class Pedido {
         return valor;
     }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     public double getImpostos() {
         return impostos;
+    }
+
+    public void setImpostos(double impostos) {
+        this.impostos = impostos;
     }
 
     public double getDesconto() {
         return desconto;
     }
 
+    public void setDesconto(double desconto){
+        this.desconto = desconto;
+    }
+
     public double getValorCobrado() {
         return valorCobrado;
+    }
+
+    public void setValorCobrado(double valorCobrado) {
+        this.valorCobrado = valorCobrado;
+    }
+
+    public String getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 }
