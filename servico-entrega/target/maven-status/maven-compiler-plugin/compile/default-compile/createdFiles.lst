@@ -1,0 +1,5 @@
+com/pizzaria/entrega/listener/EntregaListener.class
+com/pizzaria/entrega/EntregaApplication.class
+com/pizzaria/entrega/servico/EntregaService.class
+com/pizzaria/entrega/config/RestTemplateConfig.class
+com/pizzaria/entrega/config/RabbitMQConfig.class

@@ -1,0 +1,9 @@
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 1);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 2);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 3);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 4);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 5);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 6);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 7);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 8);
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 9);

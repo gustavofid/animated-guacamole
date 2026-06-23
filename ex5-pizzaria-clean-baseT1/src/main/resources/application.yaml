@@ -18,6 +18,11 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:

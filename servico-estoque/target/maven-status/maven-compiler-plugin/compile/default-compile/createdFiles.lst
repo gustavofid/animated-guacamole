@@ -1,0 +1,5 @@
+com/pizzaria/estoque/repositorio/ItemEstoqueRepository.class
+com/pizzaria/estoque/entidade/ItemEstoque.class
+com/pizzaria/estoque/servico/EstoqueService.class
+com/pizzaria/estoque/EstoqueApplication.class
+com/pizzaria/estoque/controlador/EstoqueController.class

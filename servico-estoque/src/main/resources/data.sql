@@ -1,0 +1,9 @@
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 1) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 2) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 3) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 4) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 5) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 6) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 7) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 8) ON CONFLICT (ingrediente_id) DO NOTHING;
+INSERT INTO itens_estoque (quantidade, ingrediente_id) VALUES (30, 9) ON CONFLICT (ingrediente_id) DO NOTHING;
