@@ -1,0 +1,5 @@
+/Users/gustavofid/pucrs/projarc/animated-guacamole/servico-entrega/src/main/java/com/pizzaria/entrega/EntregaApplication.java
+/Users/gustavofid/pucrs/projarc/animated-guacamole/servico-entrega/src/main/java/com/pizzaria/entrega/config/RabbitMQConfig.java
+/Users/gustavofid/pucrs/projarc/animated-guacamole/servico-entrega/src/main/java/com/pizzaria/entrega/config/RestTemplateConfig.java
+/Users/gustavofid/pucrs/projarc/animated-guacamole/servico-entrega/src/main/java/com/pizzaria/entrega/listener/EntregaListener.java
+/Users/gustavofid/pucrs/projarc/animated-guacamole/servico-entrega/src/main/java/com/pizzaria/entrega/servico/EntregaService.java
